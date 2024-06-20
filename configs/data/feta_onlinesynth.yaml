@@ -1,0 +1,26 @@
+# link augmentations from augmentations yaml
+defaults:
+  - _self_
+  - augmentations_online
+  - fetsynthgen
+_target_: src.data.feta_datamodule_online.FetaDataModuleOnlineSynth
+
+# type of images and splits to use for training and validation
+train: synth # synth feta
+
+validate: feta # synth feta feta+synth
+
+train_split: ['CHUV - rec-mial']
+
+valid_split: ['KISPI - rec-mial']
+
+# path to the datasets tha should countain bids style folders with images
+
+feta_path: /path/to/feta/bids
+synth_path: /path/to/feta/bids
+split_file: data/splits.csv # used for training purposes to define subjects belonging to each split
+
+batch_size: 1
+num_workers: 10
+pin_memory: False
+synth_val_size: 100

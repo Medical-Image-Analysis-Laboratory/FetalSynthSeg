@@ -1,0 +1,76 @@
+generator_params:
+  # generation debug parameters
+  num_gpus: 1
+  exp_name: 'feta'
+  job_name: 'baseline_gen'
+  vis_itr: 5000 # save synth images every 5000 iterations for visualization
+  eval_only: False
+  out_dir: outs/BrainID
+  task: feat-anat
+
+  ## synth generator set up
+  base_generator:
+
+    # paths to numpy files or list of integer labels
+    # labels in the input segmentation maps (seeds) that will be used to generate the synthetic data
+    # it is a list of all of the labels that can be in your seed image and the generator should use
+    seed_lables: [0, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49]
+    # groups of seed_labels to be treated as the same tissue class for synthetic image generation
+    # this is in case you would want to treat certain labels from your seeds as the same tissue type
+    generation_classes: [0, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49]
+    # mapping between the seed_labels and the meta labels used (see seed labels convention in a provided example)
+    output_labels: [0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4]
+
+
+    size: [256, 256, 256] # size to read the original image data
+    sample_size: [256, 256, 256] # actual input sample size
+    preserve_resol: 0.2 # prb of using original resolution for image synthesis
+    max_rotation: 20
+    max_shear: 0.02
+    max_scaling: 0.1
+    nonlin_scale_min: 0.03
+    nonlin_scale_max: 0.06
+    nonlin_std_max: 4
+
+    bag_prob: 0.5
+    bag_scale_min: 0.02
+    bag_scale_max: 0.08
+    bf_scale_min: 0.004
+    bf_scale_max: 0.02
+    bf_std_min: 0.01
+    bf_std_max: 0.02
+
+    gamma_std: 0.1
+
+    noise_std_min: 5
+    noise_std_max: 15
+
+    min_resampling_iso_res: 0.5
+    max_resampling_iso_res: 1.5
+
+    exvixo_prob: 0.25
+    exvixo_prob_vs_photo: 0.66666666666666
+    pv: False 
+    
+    data_augmentation: True
+    apply_deformation: True
+    apply_gamma_transform: True
+    apply_bias_field: True
+    apply_resampling: True
+    apply_noises: True
+
+    deform_one_hots: False # True
+    integrate_deformation_fields: True # IF TOO SLOW, TRY FALSE
+    produce_surfaces: False
+    bspline_zooming: False  
+    n_steps_svf_integration: 8
+    nonlinear_transform: True
+    photo_prob: 0. # keeps thickness/spacing of the original image
+
+    # max_surf_distance: 2.0 # clamp at plus / minus this number (both the ground truth and the prediction)
+
+min_subclasses: 1
+max_subclasses: 4
+seed_path: null # path to the seeds folder, with the same format as in data
+mlab_subclasses: null
+segm_path: null # path to the segmentations to be used as gt
