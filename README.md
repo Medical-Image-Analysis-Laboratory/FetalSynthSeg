@@ -17,7 +17,7 @@ FetalSynthSeg is a **domain randomization** method designed to enhance the **seg
 
 </div>
 
-**In this repository we provide the code necessary to run the synthetic data generation framework, training scripts as well as models and their weights used in the paper.**
+**In this repository we provide the code necessary to run the synthetic data generation framework as well as models and their weights used in the paper.**
 
 ## Docker 🐳 
 We provide a Docker image `vzalevskyi/fetalsynthseg:v1` to run the inference code in a containerized environment. 
