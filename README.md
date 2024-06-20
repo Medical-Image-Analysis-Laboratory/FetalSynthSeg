@@ -1,6 +1,6 @@
 <div align="center">
 
-# [FetalSynthSeg](https://your-link-here)
+# [FetalSynthSeg](https://arxiv.org/abs/2403.15103)
 ![Version](https://img.shields.io/badge/version-1.0.0-blue)
 </div>
 
