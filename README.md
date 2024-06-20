@@ -44,7 +44,7 @@ It is optimized to work with super-resolution reconstructed fetal MRI images (GA
 ## Usage
 There are 3 main components in this repository:
 
-* **Synthetic data generation** Based on the Pytorch re-implementations of SynthSeg's generator from the [Brain-ID repository](https://github.com/peirong26/Brain-ID/tree/main?tab=readme-ov-file)  [2]. The generator code is located in the [`src/data/components/synth_gen.py`](src/data/components/synth_gen.py). See [`test/visualize_synth_generation.py`](test/visualize_synth_generation.py) for usage example. We use `hydra` and `omegaconfig` to track configuration of the runs and the generator, see [`configs/data/fetsynthgen.yaml`](configs/data/fetsynthgen.yaml) for an example of the synthetic generator configuration used in our experiments.
+* **Synthetic data generation** Based on the Pytorch re-implementations of SynthSeg's generator from the [Brain-ID repository](https://github.com/peirong26/Brain-ID/tree/main?tab=readme-ov-file)  [2]. The generator code is located in the [`src/data/components/synth_gen.py`](src/data/components/synth_gen.py). See [`src/test/visualize_synth_generation.py`](src/test/visualize_synth_generation.py) for usage example. We use `hydra` and `omegaconfig` to track configuration of the runs and the generator, see [`configs/data/fetsynthgen.yaml`](configs/data/fetsynthgen.yaml) for an example of the synthetic generator configuration used in our experiments.
 
 * **Data** While we do not provide access to all fetal MRI data or segmentations used in the paper, it is possible to request access to the KISPI dataset on the [Fetal Tissue Annotation Challenge - FeTA MICCAI](https://www.synapse.org/Synapse:syn25649159/wiki/610007) Synapse page [3].
 
