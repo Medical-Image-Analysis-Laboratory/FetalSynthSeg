@@ -1,0 +1,15 @@
+train_augm:
+  _target_: monai.transforms.Compose
+  transforms:
+    - _target_: monai.transforms.ScaleIntensityd
+      keys: ['image']
+      minv: 0
+      maxv: 1
+
+val_augm:
+  _target_: monai.transforms.Compose
+  transforms:
+    - _target_: monai.transforms.ScaleIntensityd
+      keys: ['image']
+      minv: 0
+      maxv: 1
