@@ -71,6 +71,4 @@ generator_params:
 
 min_subclasses: 1
 max_subclasses: 4
-seed_path: null # path to the seeds folder, with the same format as in data
 mlab_subclasses: null
-segm_path: null # path to the segmentations to be used as gt

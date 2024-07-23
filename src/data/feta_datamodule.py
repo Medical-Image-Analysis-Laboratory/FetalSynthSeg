@@ -239,3 +239,57 @@ class FetaDataModuleOnlineSynth(pl.LightningDataModule):
                           pin_memory=self.pin_memory,
                           shuffle=False) for ds in val_ds]
         return dls
+
+if __name__ == '__main__':
+    from hydra import compose, initialize
+    from hydra.utils import instantiate
+    from omegaconf import OmegaConf
+
+    with initialize(version_base=None, config_path="../../configs/data",):
+        cfg = compose(config_name="feta_onlinesynth", )
+        print(OmegaConf.to_yaml(cfg))
+        # instantiate datamodule
+        dm = instantiate(cfg)
+
+        train_ds = dm.train_dataloader().dataset
+        valid_df = dm.val_dataloader().dataset
+
+        print(f"Train dataset: {len(train_ds)}")
+        print(f"Validation dataset: {len(valid_df)}")
+
+        gen_data = train_ds[1]
+        trimg = gen_data[0]
+        valimg = valid_df[1][0]
+        trsegm = gen_data[1]
+        valsegm = valid_df[1][1]
+        print(f'TNan: {trimg.isnan().sum()}')
+        print(f'VNan: {valimg.isnan().sum()}')
+
+        # print(f'Train image path: {train_ds.img_paths[0]}')
+        # print(f'Validation image path: {valid_df.img_paths[0]}')
+
+        print(f"Train image shape: {trimg[0].shape}")
+        print(f"Validation image shape: {valimg[0].shape}")
+        print(f"Train segm shape: {trsegm.shape}")
+        print(f"Validation sehm shape: {valsegm.shape}")
+        print(f'Train Max {trimg.max()} type {type(trimg)} min {trimg.min()}')
+        print(f'Val Max {valimg.max()} type {type(valimg)} min {valimg.min()}')
+        # plot images in the sample plot
+        import matplotlib.pyplot as plt
+        fig, ax = plt.subplots(1, 2)
+        ax[0].imshow(trimg[0, 128, :, :].cpu(), cmap='gray')
+        ax[0].set_title('Train image')
+        ax[1].imshow(valimg[0, 128, :, :].cpu(), cmap='gray')
+        ax[1].set_title('Validation image')
+        plt.tight_layout()
+        plt.show()
+
+
+        import matplotlib.pyplot as plt
+        fig, ax = plt.subplots(1, 2)
+        ax[0].imshow(trsegm[0, 128, :, :].cpu(), cmap='gray')
+        ax[0].set_title('Train image')
+        ax[1].imshow(valsegm[0, 128, :, :].cpu(), cmap='gray')
+        ax[1].set_title('Validation image')
+        plt.tight_layout()
+        plt.show()
